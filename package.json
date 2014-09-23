@@ -9,7 +9,15 @@
   "author": "Johan Wergeius",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.8.3",
     "express": "^4.9.3",
-    "jade": "^1.7.0"
+    "jade": "^1.7.0",
+    "mongoose": "^3.8.16",
+    "morgan": "^1.3.1",
+    "nib": "^1.0.3",
+    "stylus": "^0.49.0"
+  },
+  "devDependencies": {
+    "bower": "^1.3.11"
   }
 }
