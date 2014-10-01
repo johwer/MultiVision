@@ -1,2 +1,11 @@
-h1 This is Partial
-h2 {{myVar}}
+.container
+    .jumbotron
+        h1 MultiVision
+        p Welcome to MultiVision! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus leo in quam tincidunt, at dapibus ligula vulputate. Praesent hendrerit rhoncus rhoncus. Sed eget viverra orci, eget faucibus justo. Fusce vel quam vehicula, ultricies velit eget, blandit diam. Mauris viverra neque at metus mollis eleifend. Duis sapien velit, pulvinar vitae ornare vitae, tristique et ante. Nunc finibus turpis id tortor mollis fringilla non nec leo. Curabitur pellentesque fermentum tincidunt. Ut mollis finibus ipsum egestas finibus. Aenean in euismod libero, at mollis tellus. <br><br>Nam accumsan interdum nunc, imperdiet vestibulum nunc porttitor quis. Donec malesuada libero sit amet lobortis luctus. Aliquam porttitor eget quam eu porttitor. Ut non neque ultrices, feugiat enim vitae, tincidunt quam. Maecenas scelerisque facilisis congue. In quis magna at ipsum aliquet ornare. Quisque luctus viverra aliquet. Quisque suscipit metus sit amet neque dapibus dignissim. Ut nisl nisi, finibus sit amet ullamcorper sit amet, venenatis eget augue.
+
+    .row
+        .col-md-6
+            div(ng-include="'/partials/featured-courses'")
+
+        .col-md-6
+            div(ng-include="'/partials/new-courses'")
