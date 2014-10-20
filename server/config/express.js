@@ -2,7 +2,10 @@ var express = require('express'),
     stylus = require('stylus'),
     logger = require('morgan'),
     bodyParser = require('body-parser'),
-    nib = require('nib');
+    nib = require('nib'),
+    cookieParser = require('cookie-parser'),
+    session = require('express-session'),
+    passport = require('passport');
 
 module.exports = function(app, config) {
     function compile(str, path) {
@@ -21,14 +24,23 @@ module.exports = function(app, config) {
 
     app.use(logger('dev'));
 
+    //app.use(cookieParser('foo'));
+
 
     app.use(bodyParser.urlencoded({
       extended: true
     }));
-
     app.use(bodyParser.json());
-
     //app.use(bodyParser());
+
+
+    app.use(session({
+        secret: 'foo'}//,
+        //secure: false}
+    ));
+
+    app.use(passport.initialize());
+    app.use(passport.session());
 
     app.use(stylus.middleware(
         {
@@ -42,6 +54,22 @@ module.exports = function(app, config) {
         }
     ));
 
+    /*var options = {
+      dotfiles: 'ignore',
+      etag: false,
+      extensions: ['htm', 'html'],
+      index: false,
+      maxAge: '1d',
+      redirect: false,
+      setHeaders: function (res, path) {
+       res.set('Content-Encoding', 'gzip'),
+        //res.set('content-type', 'application/javascript');
+        //res.set('Content-Type', 'Script');
+      }
+    };
+*/
+    
+   // app.use(express.static(config.rootPath + '/public/vendor/angular/', options));
     app.use(express.static(config.rootPath + '/public'));
     //app.use(express.static(__dirname + '/public'));
     //app.use(express.static(path.join(__dirname, 'public')));
