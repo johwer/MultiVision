@@ -1,5 +1,8 @@
-angular.module('app').controller('mvMainCtrl', function($scope) {
-  $scope.courses = [
+angular.module('app').controller('mvMainCtrl', function($scope, mvCachedCourses) {
+    $scope.courses = mvCachedCourses.query();
+    //$scope.courses = mvCourse.query();
+
+  /*$scope.courses = [
     {name: 'C# for Sociopaths', featured: true, published: new Date('10/5/2013')},
     {name: 'C# for Non-Sociopaths', featured: true, published: new Date('10/12/2013')},
     {name: 'Super Duper Expert C#', featured: false, published: new Date('10/1/2013')},
@@ -15,5 +18,5 @@ angular.module('app').controller('mvMainCtrl', function($scope) {
     {name: 'Code Reviews for Jerks', featured: false, published: new Date('10/1/2013')},
     {name: 'How to Deal with Narcissistic Coworkers', featured: true, published: new Date('2/15/2013')},
     {name: 'Death March Coding for Fun and Profit', featured: true, published: new Date('7/1/2013')}
-  ];
+  ];*/
 });
