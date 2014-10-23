@@ -53,7 +53,7 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser, 
 
                 var currentLocalObj = localStorageService.get('multiVisionUser');
 
-                currentLocalObj.fistname = newUserData.firstname;
+                currentLocalObj.firstname = newUserData.firstname;
                 currentLocalObj.lastname = newUserData.lastname;
                 currentLocalObj.username = newUserData.username;
 
