@@ -6,6 +6,10 @@ angular.module('app').factory('mvNotifier', function(mvToastr) {
       mvToastr.success(msg);
       console.log(msg);
       console.log('Toastr');
+    },
+    error: function(msg){
+        mvToastr.error(msg);
+        console.log(msg);
     }
   };
 });

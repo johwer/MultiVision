@@ -1,17 +1,13 @@
-var auth = require('./auth')
+var auth = require('./auth'),
+users = require('../controllers/users'),
 mongoose  = require('mongoose'),
 User = mongoose.model('User');
 
 module.exports = function (app) {
 
-    app.get('/api/users', auth.requiresRole('admin') , function(req, res){
-        console.log('');
-        User.find({}).exec(function(err, collection){
-
-            res.send(collection);
-        });
-
-    });
+    app.get('/api/users', auth.requiresRole('admin'), users.getUsers);
+    app.post('/api/users', users.createUser);
+    app.put('/api/users', users.updateUser);
     //One folder inside
     /*app.get('/partials/:partialPath', function (reg, res) {
         res.render('partials/' + reg.params.partialPath);
@@ -29,6 +25,7 @@ module.exports = function (app) {
         //res.json({ id: req.user.id, username: req.user.username });
     });
     */
+
     app.post('/login', auth.authenticate);
     
     app.post('/logout', function(req, res){

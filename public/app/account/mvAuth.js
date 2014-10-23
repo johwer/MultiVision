@@ -28,6 +28,43 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser, 
                 });
                 return dfd.promise;
         },
+        createUser: function(newUserData){
+            var newUser = new mvUser(newUserData);
+            var dfd = $q.defer();
+
+            newUser.$save().then(function(){
+                mvIdentity.currentUser = newUser;
+                dfd.resolve();
+            }, function(response){
+                dfd.reject(response.data.reason);
+            });
+
+            return dfd.promise;
+        },
+        updateCurrentUser: function(newUserData){
+            var dfd = $q.defer();
+
+            var clone = angular.copy(mvIdentity.currentUser);
+            angular.extend(clone, newUserData);
+            //clone.$save();
+            
+            clone.$update().then(function() {
+                mvIdentity.currentUser = clone;
+
+                var currentLocalObj = localStorageService.get('multiVisionUser');
+
+                currentLocalObj.fistname = newUserData.firstname;
+                currentLocalObj.lastname = newUserData.lastname;
+                currentLocalObj.username = newUserData.username;
+
+
+                localStorageService.set('multiVisionUser', currentLocalObj);
+                dfd.resolve();
+            }, function() {
+                dfd.reject(response.data.reason);
+            });
+            return dfd.promise;
+        },
         logoutUser: function(){
             var dfd = $q.defer();
             console.log('Do http post');
@@ -47,7 +84,13 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser, 
             } else{
                 return $q.reject('not authorized');
             }
+        },
+        authorizeAuthenticatedtUserForRoute: function(){
+            if(mvIdentity.isAuthenticated()){
+                return true;
+            } else{
+                return $q.reject('not authorized');
+            }
         }
-
     };
 });
